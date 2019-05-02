@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+</head>
+<body>
+<div id="result"></div>
+	
+<script>
+	
+var singleItem = {brand:"Samsung", model:"Galaxy Tab A", display:"8.7", rom:"32GB", ram:"2GB", price:"15,500"};
+
+var smartphoneArray = JSON.parse(localStorage.getItem('smartphones'));
+
+for (var x in smartphoneArray) {
+        	document.getElementById("result").innerHTML += x+':'+smartphoneArray[x].brand+' | '+smartphoneArray[x].model+' | '+smartphoneArray[x].display+' | '+smartphoneArray[x].rom+' | '+smartphoneArray[x].ram+' | '+smartphoneArray[x].price +'<br/>';
+        }
+
+smartphoneArray.push(singleItem);
+localStorage.setItem('smartphones', JSON.stringify(smartphoneArray));
+document.getElementById("result").innerHTML += "<hr/>";
+for (var x in smartphoneArray) {
+        	document.getElementById("result").innerHTML += x+':'+smartphoneArray[x].brand+' | '+smartphoneArray[x].model+' | '+smartphoneArray[x].display+' | '+smartphoneArray[x].rom+' | '+smartphoneArray[x].ram+' | '+smartphoneArray[x].price +'<br/>';
+        }
+    </script>
+
+
+<script>
+// Check browser support
+if (typeof(Storage) !== "undefined") {
+	     
+
+} else {
+    
+}
+</script>
+
+</body>
+
+
+</html>

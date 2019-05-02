@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="result"></div>
+
+<script>
+// Check browser support
+if (typeof(Storage) !== "undefined") {
+    // Store
+
+    var students = {name:"juan", model:"towo", color:"tree"};
+ sessionStorage.students=students;    
+    // Retrieve
+    
+    document.getElementById("result").innerHTML = sessionStorage.students['name'];
+} else {
+    document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+}
+</script>
+
+</body>
+
+<!-- Mirrored from www.w3schools.com/html/tryit.asp?filename=tryhtml5_webstorage_local by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 13 Mar 2016 11:02:56 GMT -->
+</html>

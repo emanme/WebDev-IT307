@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+</head>
+<body>
+<script>
+	var smartphones =[ 
+	{brand:"Samsung", model:"Galaxy A10", display:"6.2 HD+ Infinity-V display", rom:"32GB", ram:"2GB", price:"6,990"},
+	{brand:"Samsung", model:"Galaxy A20", display:"6.4-inch HD+ Super AMOLED display @ 1560 x 720px", rom:"32GB", ram:"3GB", price:"9,990"},
+	{brand:"Samsung", model:"Galaxy A50", display:"6.4-inch FHD+ 19.5:9 sAMOLED Infinity-U display", rom:"128GB", ram:"6GB", price:"17,500"},
+	{brand:"Huawei", model:"P30 Pro", display:"6.47-inch FHD+ OLED display", rom:"256GB", ram:"8GB", price:"44,990"},
+	{brand:"Huawei", model:"Y9 2019", display:"6.5 inches", rom:"64GB", ram:"4GB", price:"11,500"}
+	];
+
+var singleItem = {brand:"Samsung", model:"Galaxy Tab A", display:"8.7", rom:"32GB", ram:"2GB", price:"15,500"};
+
+console.log('typeof smartphones: ' + typeof smartphones);
+console.log('smartphones:');
+        for (var p in smartphones) {
+console.log(p+':'+smartphones[p].brand+'|'+smartphones[p].model);
+        }
+ localStorage.setItem('smartphones', JSON.stringify(smartphones));
+
+</script>
+<div id="result"></div>
+
+<script>
+// Check browser support
+if (typeof(Storage) !== "undefined") {
+	var smartphoneArray = JSON.parse(localStorage.getItem('smartphones'));
+
+        for (var x in smartphoneArray) {
+        	document.getElementById("result").innerHTML += x+':'+smartphoneArray[x].brand+' | '+smartphoneArray[x].model+' | '+smartphoneArray[x].display+' | '+smartphoneArray[x].rom+' | '+smartphoneArray[x].ram+' | '+smartphoneArray[x].price +'<br/>';
+        }
+
+
+} else {
+    
+}
+</script>
+
+</body>
+
+
+</html>

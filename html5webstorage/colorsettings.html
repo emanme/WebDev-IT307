@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<label for="color"></label>
+	<select name="color" id="color" onchange="changeColor()">
+		<option value="#001f3f">NAVY</option>
+		<option value="#0074D9">BLUE</option>
+		<option value="#7FDBFF">AQUA</option>
+		<option value="#39CCCC">TEAL</option>
+		<option value="#3D9970">OLIVE</option>
+		<option value="#2ECC40">GREEN</option>
+		<option value="#01FF70">LIME</option>
+		<option value="#FFDC00">YELLOW</option>
+		<option value="#FF851B">ORANGE</option>
+		<option value="#FF4136">RED</option>
+		<option value="#85144b">MAROON</option>
+		<option value="#F012BE">FUCHSIA</option>
+
+	</select>
+ <div id="result"></div>
+
+<script>
+	function changeColor(){
+		var color =  document.getElementById("color").value;
+		document.body.style.backgroundColor = color;
+		localStorage.setItem("color",color);
+	}
+// Check browser support
+if (typeof(Storage) !== "undefined") {
+	var rtcolor = localStorage.getItem("color");
+  document.body.style.backgroundColor =rtcolor ;
+  document.getElementById('color').value=rtcolor;
+    //document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+} else {
+    document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+}
+</script>
+
+</body>
+
+
+</html>
