@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CRUD</title>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+     function errorMessage(id){
+       $(id).addClass("highlight");
+    }
+function pageLoad() {
+   
+
+
+    // get the URL parameter item
+let url = new URL(window.location);
+let searchParams = new URLSearchParams(url.search);
+var parameterItem = searchParams.get('item');
+
+
+var hasParam=false;
+
+var smartphoneArray = JSON.parse(localStorage.getItem('smartphones'));
+
+for (var x in smartphoneArray) {
+
+  if(x==parameterItem){
+$("#brand").val(smartphoneArray[x].brand);
+$("#model").val(smartphoneArray[x].model);
+$("#display").val(smartphoneArray[x].display);
+$("#rom").val(smartphoneArray[x].rom);
+$("#ram").val(smartphoneArray[x].ram);
+$("#price").val(smartphoneArray[x].price); 
+hasParam =true;        
+  }
+    
+
+}// end of for
+
+if(!hasParam){
+location.href = "index.html?ms=invalidItem";
+}
+
+}//end of function
+   
+
+
+   $(document).ready(function(){
+
+  $("form").submit(function(){ //if form is sumitted
+  
+  //get the data from the form
+    var brand = $("#brand").val();
+   var  model= $("#model").val();
+   var  display= $("#display").val();
+   var  rom= $("#rom").val();
+   var  ram= $("#ram").val();
+   var  price= $("#price").val();
+     
+
+      var hasError=false;
+//check if formfields has data
+if ($.trim(brand).length == 0){
+    errorMessage("#brand");
+    hasError =true;
+     
+}
+if ($.trim(model).length == 0){
+    errorMessage("#model");
+    hasError =true;
+}
+if ($.trim(display).length == 0){
+    errorMessage("#display");
+    hasError =true;
+}
+if ($.trim(rom).length == 0){
+    errorMessage("#rom");
+    hasError =true;
+}
+if ($.trim(ram).length == 0){
+    errorMessage("#ram");
+    hasError =true;
+}
+if ($.trim(price).length == 0){
+    errorMessage("#price");
+    hasError =true;
+}
+
+  if(hasError){
+     $("#message").show();
+    return false;
+  }
+
+ //retrieved the data from localstorage and save it to an object variable
+    var smartphoneArray = JSON.parse(localStorage.getItem('smartphones'));
+
+   // create an object based on the data on the form
+    var phone = {brand:brand, model:model, display:display, rom:rom, ram:ram, price:price};
+ 
+   for (var x in smartphoneArray) {
+  //get all object then update edited
+  if(x==parameterItem){
+    $("#brand").val(smartphoneArray[x].brand);
+    $("#model").val(smartphoneArray[x].model);
+    $("#display").val(smartphoneArray[x].display);
+    $("#rom").val(smartphoneArray[x].rom);
+    $("#ram").val(smartphoneArray[x].ram);
+    $("#price").val(smartphoneArray[x].price); 
+        
+  }
+  else{
+
+  }
+
+
+    if(smartphoneArray==null){
+         //add "["+ and +"]" if the smartphoneArray has no value
+         //the set it as multi-object array ready
+        localStorage.setItem('smartphones', "["+JSON.stringify(phone)+"]");
+        alert(JSON.parse(localStorage.getItem('smartphones')));
+    }
+    else{
+      
+        //add new phone to the smarthphone list
+       smartphoneArray.push(phone);
+        //update the local storage with new data
+       localStorage.setItem('smartphones', JSON.stringify(smartphoneArray));
+       //alert(localStorage.getItem('smartphones'));
+    }
+     
+  //if(smartphoneArray)
+  
+   
+
+   
+    
+    
+    //redirect to index after succesful save
+    location.href = "index.html";
+    //stop form for submitting to action=""
+    return false;
+  });//end of $("form")...
+
+ 
+
+});//end of  $(document)...
+
+  </script>
+  
+</head>
+ 
+<body onload="pageLoad()" >
+
+<div class="container">
+  <br/>
+   <a href="index.html" class="btn btn-primary" role="button">Back</a>
+  <h2>Add New Smartphone</h2>
+  <div id="message">
+  <div class="alert alert-danger">
+  <strong>Error!</strong> Forms cannot be empty.
+</div></div>
+  <form action="">
+    <div class="form-group">
+      <label for="brand">Brand:</label>
+      <input type="brand" class="form-control" id="brand"  placeholder="Smartphone Brand" name="brand"  >
+    </div>
+    <div class="form-group">
+      <label for="pwd">Model:</label>
+      <input type="text" class="form-control" id="model" placeholder="Smartphone Model" name="model"  >
+    </div>
+       <div class="form-group">
+      <label for="pwd">Display Size:</label>
+      <input type="text" class="form-control" id="display" placeholder="Screen Size" name="display"  >
+    </div>
+     <div class="form-group">
+      <label for="pwd">Rom:</label>
+      <input type="text" class="form-control" id="rom" placeholder="Ex. 16GB" name="rom"  >
+    </div>
+     <div class="form-group">
+      <label for="pwd">Ram:</label>
+      <input type="text" class="form-control" id="ram" placeholder="Ex. 2GB" name="ram"  >
+    </div>
+     <div class="form-group">
+      <label for="pwd">Price:</label>
+      <input type="text" class="form-control" id="price" placeholder="Ex. PHP 14,999" name="price"  >
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+  </form>
+</div>
+	 
+</body>
+</html>

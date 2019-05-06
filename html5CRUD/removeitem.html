@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Smartphone APP</title>
+	  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</head>
+<body  >
+
+<script >
+ 
+// get the URL parameter item
+let url = new URL(window.location);
+let searchParams = new URLSearchParams(url.search);
+var parameterItem = searchParams.get('item');
+
+
+var smartphoneArray = JSON.parse(localStorage.getItem('smartphones'));
+
+
+
+
+// remove the item based on the parameterItem splice(arrayindex,howManyElementToBeDeleted);
+smartphoneArray.splice(parameterItem,1);
+
+localStorage.setItem('smartphones', JSON.stringify(smartphoneArray));
+
+//redirect to index.html
+ location.href = "index.html";
+    </script>
+</body>
+
+
+</html>

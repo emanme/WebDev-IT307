@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Smartphone APP</title>
+	  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</head>
+<body >
+	<div class="container">
+<div id="phonelist">
+	 <a href="add.html" class="btn btn-primary" role="button">Add New</a>
+	 <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Display</th>
+         <th>Rom / Ram</th>
+         <th>Price</th>
+          <th>Options</th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+      
+    </tbody>
+  </table>
+  <a href="add.html" class="btn btn-primary" role="button">Add New</a>
+   
+</div>
+</div>	
+<script>
+	
+ //var phone = [{brand:"Samsung", model:"Galaxy Tab A", display:"8.7", rom:"32GB", ram:"2GB", price:"15,500"}, {brand:"Samsung", model:"Galaxy Tab A", display:"8.7", rom:"32GB", ram:"2GB", price:"15,500"}];
+
+ // localStorage.setItem('smartphones', JSON.stringify(phone));
+
+var singleItem = {brand:"Samsung", model:"Galaxy Tab A", display:"8.7", rom:"32GB", ram:"2GB", price:"15,500"};
+
+var smartphoneArray = JSON.parse(localStorage.getItem('smartphones'));
+
+//localStorage.clear();
+var count=false;
+for (var x in smartphoneArray) {
+        	document.getElementById("tbody").innerHTML +=
+        	"<tr><td>"+smartphoneArray[x].brand + "</td>"+ 
+        	"<td>"+smartphoneArray[x].model + "</td>"+
+        	"<td>"+smartphoneArray[x].display + "</td>"+
+        	"<td>"+smartphoneArray[x].rom + " / "+
+        	smartphoneArray[x].ram + "</td>"+
+        	"<td>"+smartphoneArray[x].price +  "</td>"+
+        '<td><a href="edititem.html?item='+ x +'" class="btn btn-warning" role="button">Edit</a>&nbsp;<a href="removeitem.html?item='+ x +'" class="btn btn-danger" role="button">Remove</a></td>'+
+        	"</tr>";
+        	count=true;
+        		//document.getElementById("tbody").innerHTML += x+':'+smartphoneArray[x].brand+' | '+smartphoneArray[x].model+' | '+smartphoneArray[x].display+' | '+smartphoneArray[x].rom+' | '+smartphoneArray[x].ram+' | '+smartphoneArray[x].price +'<br/>';
+        }
+//display empty message if no data from localstorage
+if(!count){
+	document.getElementById("tbody").innerHTML = '<tr><td>Empty</td><td>Empty</td><td>Empty</td><td>Empty</td><td>Empty</td></tr>';
+}
+
+    </script>
+
+
+<script>
+// Check browser support
+if (typeof(Storage) !== "undefined") {
+	     
+
+} else {
+    
+}
+</script>
+
+</body>
+
+
+</html>

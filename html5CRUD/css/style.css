@@ -1,0 +1,14 @@
+body{
+   /*   background-color: #3D96E4; 
+      color: #fff;*/
+    }
+    form-control,.btn {
+     /*   border:solid #000 2px ;*/
+    }
+    .highlight
+    {
+    border: 1px solid red !important;
+    }
+    #message{
+      display: none;
+    }
