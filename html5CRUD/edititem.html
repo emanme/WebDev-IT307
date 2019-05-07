@@ -96,52 +96,44 @@ if ($.trim(price).length == 0){
     return false;
   }
 
+
+   // get the URL parameter item
+let url = new URL(window.location);
+let searchParams = new URLSearchParams(url.search);
+var parameterItem = searchParams.get('item');
+
+
  //retrieved the data from localstorage and save it to an object variable
     var smartphoneArray = JSON.parse(localStorage.getItem('smartphones'));
 
    // create an object based on the data on the form
     var phone = {brand:brand, model:model, display:display, rom:rom, ram:ram, price:price};
  
+var phoneArray=[];
+
+if(smartphoneArray!=null){ 
    for (var x in smartphoneArray) {
   //get all object then update edited
-  if(x==parameterItem){
-    $("#brand").val(smartphoneArray[x].brand);
-    $("#model").val(smartphoneArray[x].model);
-    $("#display").val(smartphoneArray[x].display);
-    $("#rom").val(smartphoneArray[x].rom);
-    $("#ram").val(smartphoneArray[x].ram);
-    $("#price").val(smartphoneArray[x].price); 
-        
-  }
-  else{
-
-  }
-
-
-    if(smartphoneArray==null){
-         //add "["+ and +"]" if the smartphoneArray has no value
-         //the set it as multi-object array ready
-        localStorage.setItem('smartphones', "["+JSON.stringify(phone)+"]");
-        alert(JSON.parse(localStorage.getItem('smartphones')));
-    }
-    else{
-      
-        //add new phone to the smarthphone list
-       smartphoneArray.push(phone);
-        //update the local storage with new data
-       localStorage.setItem('smartphones', JSON.stringify(smartphoneArray));
-       //alert(localStorage.getItem('smartphones'));
-    }
      
-  //if(smartphoneArray)
-  
-   
+    if(x==parameterItem){
+         phoneArray.push(phone);
+     }
+     else{
+       var eachPhone = {brand:smartphoneArray[x].brand, model:smartphoneArray[x].model, display:smartphoneArray[x].display, rom:smartphoneArray[x].rom, ram:smartphoneArray[x].ram, price:smartphoneArray[x].price};
+        phoneArray .push(eachPhone);
+       }
+       //console.log("Phone:" + JSON.stringify(phone));
+       //console.log("eachPhone:" +JSON.stringify(eachPhone));
 
-   
+  }
+}
+  
+       localStorage.setItem('smartphones', JSON.stringify(phoneArray));
+     
     
     
     //redirect to index after succesful save
-    location.href = "index.html";
+location.href = "index.html";
     //stop form for submitting to action=""
     return false;
   });//end of $("form")...
